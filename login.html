@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login IC Fitness</title>
+</head>
+
+<body>
+
+  <h2>Login IC Fitness</h2>
+
+  <input type="email" id="email" placeholder="Digite seu email"><br><br>
+  <input type="password" id="senha" placeholder="Digite sua senha"><br><br>
+
+  <button onclick="login()">Entrar</button>
+
+  <p id="msg"></p>
+
+  <script type="module">
+    // 🔥 Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+    // 🔥 SUA CONFIG (já está certa)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyo5PII1g_nC-sMsPWxiz1Ufu7Qoyrrhw",
+      authDomain: "ic-fitness-92d1d.firebaseapp.com",
+      projectId: "ic-fitness-92d1d",
+      storageBucket: "ic-fitness-92d1d.firebasestorage.app",
+      messagingSenderId: "875922897801",
+      appId: "1:875922897801:web:8cc64bc21a50ea5b2f7f58"
+    };
+
+    // 🔥 Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🔥 Função de login
+    window.login = function() {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      signInWithEmailAndPassword(auth, email, senha)
+        .then((userCredential) => {
+          document.getElementById("msg").innerText = "Login realizado com sucesso 🔥";
+          console.log(userCredential.user);
+        })
+        .catch((error) => {
+          document.getElementById("msg").innerText = "Erro: " + error.message;
+        });
+    }
+
+  </script>
+
+</body>
+</html>
